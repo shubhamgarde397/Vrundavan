@@ -1,0 +1,88 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="NRCM_HOME">Nitin Roadways</a>
+    </div>
+    <!-- <ul class="nav navbar-nav">
+      <li>
+        <a (click)="getData()">Available Trucks</a>
+      </li>
+
+    </ul> -->
+  </div>
+</nav>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: black;color: wheat;">
+  <ul class="nav nav-tabs">
+    <li class="nav-item" style="color: wheat;">
+      <a class="nav-link" aria-current="page" (click)="divChange(1)">Truck Entry</a>
+    </li>
+    <li class="nav-item" style="color: wheat;">
+      <a class="nav-link" (click)="divChange(2)">Truck Show</a>
+    </li>
+  </ul>
+</nav>
+
+<div *ngIf="entry">
+  <form [formGroup]="myFormGroup" (ngSubmit)="submitAmt()">
+    <div>
+      <label>Truck</label>
+      <input formControlName="truckno" class="form-control">
+    </div>
+    <div><label>Type</label>
+      <select label="Type" formControlName="type" class="form-control">
+        <option value="Open">Open</option>
+        <option value="Container">Container</option>
+      </select>
+    </div>
+    <div>
+      <label>Contact</label>
+      <input type="number" formControlName="contact" class="form-control">
+    </div>
+    <div>
+      <label>Length</label>
+      <input type="number" formControlName="l" class="form-control">
+    </div>
+    <div>
+      <label>Width</label>
+      <input type="number" formControlName="b" value="7" class="form-control">
+    </div>
+    <div>
+      <label>Height</label>
+      <input type="number" formControlName="h" value="7" class="form-control">
+    </div>
+    <div>
+      <label>Weight</label>
+      <input type="number" formControlName="w" value="7" class="form-control">
+    </div>
+    <div>
+        <button class="btn btn-danger" style="width: 100%;" [disabled]="!myFormGroup.valid">Submit</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="show">
+  <button class='btn btn-success' style="width: 100%;" (click)="getAll()">Get</button>
+  <br><br>
+  <div class="container" *ngIf="byTruckName">
+    <div class="row" *ngFor="let i of truckData;let j=index;" style="margin-bottom: 2vh;border: 2px solid wheat;">
+      <div class="col-xs-4">
+        <label>{{j+1}}.   {{i.truckno}}<br>{{i.type}}</label>
+        <input type="text" id="oname_{{j}}" class="form-control" *ngIf="i.pd">
+        <input type="text" id="pan_{{j}}"  class="form-control"  *ngIf="i.pd">
+        <button class="btn btn-warning" (click)="setPAN(i,j)"  *ngIf="i.pd">PAN</button>
+      </div>
+      <div class="col-xs-2">
+        <label>{{i.l}}x{{i.b}}x{{i.h}}<br>{{i.w}}-Ton</label>
+      </div>
+      <div class="col-xs-4">
+        <label>{{i.contact}}</label>
+      </div>
+      <div class="col-xs-1">
+        <span class="glyphicon glyphicon-remove btn btn-danger" (click)="delete(i,j)"></span>
+      </div>
+    </div>
+    
+  </div>
+</div>
+

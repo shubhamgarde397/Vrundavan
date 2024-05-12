@@ -1,0 +1,49 @@
+button{
+    border-radius: 100px;
+}
+
+.time{
+    margin-top:15px;
+    color:white;
+    text-align: right;
+}
+
+.PochDetailsBell{
+    margin-top: 10px;
+}
+
+.page-container {
+    background-color: #f8f9fa;
+    padding: 10px;
+    width: 90%;
+    min-width: 378px;
+}
+
+.parent-container,
+.d-flex {
+    display: flex;
+}
+
+.child-centered,
+.m-auto {
+    /* Magic! */
+    margin: auto;   
+    max-width: 430px;
+    min-width: 220px;
+}
+
+div#topdiv, div#bottomdiv{
+    position:fixed; 
+    left: 0px;
+    width: 100%;
+    color: #CCC;        
+}
+
+div#topdiv{top:0px;}
+div#bottomdiv {bottom:0px;}
+
+
+input,select,option,li,nav{
+    background-color: black;
+    color: wheat;
+}
