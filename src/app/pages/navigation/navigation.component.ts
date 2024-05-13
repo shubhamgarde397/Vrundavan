@@ -8,7 +8,6 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ObsServiceService } from 'src/app/common/services/Data/obs-service.service';
 import { handleFunction } from 'src/app/common/services/functions/handleFunctions';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
 import {FormControl, Validators} from '@angular/forms';
 
 @Component({
@@ -20,7 +19,14 @@ import {FormControl, Validators} from '@angular/forms';
 @Input()
 export class NavigationComponent implements OnInit {
   public entry=false;
-  public show = true;
+  public show = false;
+  public s1=false;
+  public s2=false;
+  public s3=false;
+  public s4=false;
+  public s5=false;
+  public s6=false;
+  public innerDiv=[[{'add':false,'display':false}]]
   public truckData=[
     {
         "_id": "65b8a16067e61d27f915da02",
@@ -75,17 +81,33 @@ export class NavigationComponent implements OnInit {
     
   }
 
-
   divChange(data){
+    this.s1=false;
+    this.s2=false;
+    this.s3=false;
+    this.s4=false;
+    this.s5=false;
+    this.s6=false;
     switch (data) {
       case 1:
-        this.entry=true;
-        this.show=false;
+        this.s1=true
+        // this.router.
         break;
 
         case 2:
-          this.entry=false;
-          this.show=true;
+          this.s2=true;
+        break;
+        case 3:
+          this.s3=true;
+        break;
+        case 4:
+          this.s4=true;
+        break;
+        case 5:
+          this.s5=true;
+        break;
+        case 6:
+          this.s6=true;
         break;
     }
   }

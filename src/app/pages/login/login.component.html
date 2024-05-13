@@ -1,0 +1,70 @@
+<div *ngIf="isLoginSuccess">
+  <router-outlet></router-outlet>
+</div>
+
+
+<div class="container-fluid" *ngIf="!isLoginSuccess">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" routerLink="HOTEL_HOME">HOTEL VRUNDAVAN</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="content" role="main" *ngIf="logging">
+    
+    <!-- style="background-color: blue;" -->
+  
+
+
+  <div class="row ">
+    <div class="col-xs-12" id="main">
+      <form [formGroup]="myFormGroup" submitted=true
+        enctype="multipart/form data" action="/" name="myform" id="myform" class="form-horizontal">
+
+        <div class="form-group">
+          <div class="col-xs-4">Username : </div>
+          <div class="col-xs-8">
+            <input type="text"  class="form-control input" placeholder="Username"
+              formControlName="username" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-4">Password : </div>
+          <div class="col-xs-8">
+            <input type="password"  class="form-control input" placeholder="Password"
+              formControlName="password" required />
+          </div>
+        </div>
+
+        <!-- <div class="content" role="main"> -->
+  
+        
+          <div class="form-group">
+            <a class="btn btn-success" style="width: 100%;" (click)="login(myFormGroup)">
+              <i class="fa fa-truck colorgrey"></i><span class="fontgrey"><i class="material-icons">lock_open</i></span>
+            </a>
+    
+          </div>
+        
+        <!-- </div> -->
+
+      </form>
+    </div>
+  </div>
+</div>
+<div class="content" role="main" *ngIf="!logging">
+  
+  <div class="form-group">
+    <a class="btn btn-success" style="width: 100%;">
+      <i class="fa fa-truck colorgrey"></i><span class="fontgrey">WAIT WHILE WE LOG YOU IN!</span>
+    </a>
+
+  </div>
+</div>
+
+</div>
+

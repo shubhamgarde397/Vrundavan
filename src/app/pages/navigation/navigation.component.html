@@ -1,30 +1,27 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" routerLink="NRCM_HOME">Nitin Roadways</a>
+      <a class="navbar-brand" routerLink="HOTEL_HOME">HOTEL VRUNDAVAN</a>
     </div>
-    <!-- <ul class="nav navbar-nav">
-      <li>
-        <a (click)="getData()">Available Trucks</a>
-      </li>
-
-    </ul> -->
+    
+        <button class="btn btn-danger" routerLink="ACCOUNT">Accounts</button>
+        <button class="btn btn-danger" (click)="divChange(2)">Salary</button>
+        <button class="btn btn-danger" (click)="divChange(3)">Store</button>      
+        <button class="btn btn-danger" (click)="divChange(4)">Order</button>
+              <!-- <button class="btn btn-danger" (click)="divChange(5)">Zomato</button>-->
+        <button class="btn btn-danger" (click)="divChange(6)">Charts</button>
+        <button class="btn btn-danger" routerLink="SETTINGS">Settings</button>
+        <button class="btn btn-danger" (click)="divChange(8)">Logout</button>
+      
   </div>
 </nav>
 
-<nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: black;color: wheat;">
-  <ul class="nav nav-tabs">
-    <li class="nav-item" style="color: wheat;">
-      <a class="nav-link" aria-current="page" (click)="divChange(1)">Truck Entry</a>
-    </li>
-    <li class="nav-item" style="color: wheat;">
-      <a class="nav-link" (click)="divChange(2)">Truck Show</a>
-    </li>
-  </ul>
-</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>
 
-<div *ngIf="entry">
-  <form [formGroup]="myFormGroup" (ngSubmit)="submitAmt()">
+<!-- <div *ngIf="s1">
+  <form [formGroup]="myFormGroup" (ngSubmit)="submitAmt()" *ngIf="innerDiv[0][0]['add']">
     <div>
       <label>Truck</label>
       <input formControlName="truckno" class="form-control">
@@ -59,9 +56,19 @@
         <button class="btn btn-danger" style="width: 100%;" [disabled]="!myFormGroup.valid">Submit</button>
     </div>
   </form>
-</div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: black;color: wheat;">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" aria-current="page" (click)="divChangeI(1,1,'add')">Add</a>
+      </li>
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" (click)="divChangeI(1,1,'display')">Get</a>
+      </li>
+    </ul>
+  </nav>
+</div> -->
 
-<div *ngIf="show">
+<!-- <div *ngIf="s2">
   <button class='btn btn-success' style="width: 100%;" (click)="getAll()">Get</button>
   <br><br>
   <div class="container" *ngIf="byTruckName">
@@ -84,5 +91,15 @@
     </div>
     
   </div>
-</div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: black;color: wheat;">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" aria-current="page" (click)="divChange(1)">Truck Entry 1 </a>
+      </li>
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" (click)="divChange(2)">Truck Show 1 </a>
+      </li>
+    </ul>
+  </nav>
+</div> -->
 

@@ -25,15 +25,17 @@ export class ApiCallsService {
     this.typeofuser=this.securityCheck.typeofuser;
   }
 
-  handleData_New_python( formBody = {}) {
-    formBody['todayDate']=this.handlefunction.createDate(new Date());
-    formBody['website'] = 'nrcm_a';
-    formBody['user'] = 'tuks';
-    formBody['nrcmid'] = 10;
+  handleData_New_python( formBody = {}, todayDate=this.handlefunction.createDate(new Date())) {
+    formBody['todayDate']=todayDate;
+    formBody['website'] = 'vr';
+    formBody['vrid'] = this.securityCheck.vrid;
     this.headerPost = new HttpHeaders();
     this.headerPost.append('Content-Type', 'application/json');
     this.URL = this.getfullapi.getFullAPI();
-    return this.httpClient.post(this.URL, formBody, { headers: this.headerPost }).pipe(map((res) => res))
+    
+    return this.httpClient.post(this.URL, formBody, { headers: this.headerPost }).pipe(map((res) => res));
+      
   }
+
 
 }

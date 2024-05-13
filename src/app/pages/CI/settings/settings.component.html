@@ -1,0 +1,116 @@
+<div>
+  <div *ngIf="tab==4">
+
+<div class="row">
+  <button class="btn btn-warning" data-toggle="modal" data-target="#myModal">Category</button>
+  <button class="btn btn-warning" data-toggle="modal" data-target="#myModalSC">Sub Category</button>
+</div>
+    
+    <div class="well" style="background-color: black;">
+      <ul>
+        <li *ngFor="let i of categories;let ii = index;">
+          <a (click)="change('c',i.categoryName,i.categoryid)">{{i.categoryName}}</a>
+          <ul>
+            <li *ngFor="let j of i.subCategory;let jj = index;">
+              <a (click)="change('sc',j,jj,ii)">{{j}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+      
+    
+  </div>
+
+
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: black;color: wheat;">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" aria-current="page" (click)="divChangeI(1)">Login Date</a>
+      </li>
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" (click)="divChangeI(2)">Register</a>
+      </li>
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" (click)="divChangeI(3)">Approvals</a>
+      </li>
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" (click)="divChangeI(4)">Cat SCat</a>
+      </li>
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" (click)="divChangeI(5)">Roles</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+
+<!-- Modals -->
+<div class="container">
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+  
+      <div class="modal-content" style="background-color: black;border-color: wheat;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Category</h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <label>Category</label>
+            <input type="text" [(ngModel)]="categoryName" class="form-control">
+          </div>
+          <div>
+            <button class="btn btn-success" (click)="addcat(1)">Add</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<div class="container">
+  
+  <div class="modal fade" id="myModalSC" role="dialog">
+    <div class="modal-dialog">
+    
+  
+      <div class="modal-content" style="background-color: black;border-color: wheat;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sub Category</h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <label>Category</label>
+            <select class="form-control" [(ngModel)]="categoryName">
+              <option *ngFor="let i of categories;let j = index;" value={{i._id}}>{{i.categoryName}}</option>
+            </select>
+          </div>
+          <div>
+            <label>Category</label>
+            <input type="text" [(ngModel)]="subCatName" class="form-control">
+          </div>
+          <div>
+          <div>
+            <button class="btn btn-success" (click)="addcat(2)">Add</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+<!-- Modals -->

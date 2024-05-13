@@ -26,7 +26,7 @@ export class SecurityCheckService {
   public role = 6;
   public typeofuser = 3;
   public amountShow=false;
-  public nrcmid;
+  public vrid;
   constructor() {
     this.yearNames = this.generateYears();
   }
@@ -70,8 +70,8 @@ this.amountShow=data;
   setUserName(data){
     this.username2=data;
   }
-  setNRCMid(data){
-    this.nrcmid=data;
+  setVRid(data){
+    this.vrid=data;
   }
 
   setRole(role) {

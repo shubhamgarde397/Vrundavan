@@ -1,0 +1,68 @@
+<div>
+  <form [formGroup]="myFormGroup" (ngSubmit)="submitAmt()" *ngIf="tab==1">
+    <div>
+      <label>Date</label>
+      <input formControlName="date" class="form-control">
+    </div>
+    <div><label>Category</label>
+      <select label="Type" formControlName="category" class="form-control" (change)="getSCAT()">
+        <option *ngFor="let i of category;let j = index;" value={{i}}>{{i}}</option>
+      </select>
+    </div>
+    <div>
+      <label>Sub Category</label>
+      <select label="Type" formControlName="subcategory" class="form-control">
+        <option *ngFor="let i of subcategory;let j = index;" value={{i}}>{{i}}</option>
+      </select>
+    </div>
+    <div>
+      <label>Reason</label>
+      <input type="text" formControlName="reason" class="form-control">
+    </div>
+    <div>
+      <label>Quantity</label>
+      <input type="number" formControlName="qty" value="" class="form-control">
+    </div>
+    <div>
+      <label>Amount</label>
+      <input type="number" formControlName="amt" value="" class="form-control">
+    </div>
+    <div>
+      <label>Given From</label>
+      <select label="Type" formControlName="givenFrom" class="form-control">
+        <option value='Drawer'>Drawer</option>
+        <option value='UPI'>UPI</option>
+        <option value='To Pay'>To Pay</option>
+        <option value='Other'>Other</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Given By</label>
+      <select label="Type" formControlName="givenBy" class="form-control">
+        <option value='Atharva'>Atharva</option>
+        <option value='Rohit'>Rohit</option>
+        <option value='Kaka'>Kaka</option>
+        <option value='Shubham'>Shubham</option>
+        <option value='Anil'>Anil</option>
+        <option value='Firoz'>Firoz</option>
+      </select>
+    </div>
+    <div>
+        <button class="btn btn-danger" style="width: 100%;" [disabled]="!myFormGroup.valid">Submit</button>
+    </div>
+  </form>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: black;color: wheat;">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" aria-current="page" (click)="divChangeI(1)">Add</a>
+      </li>
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" (click)="divChangeI(2)">Get</a>
+      </li>
+      <li class="nav-item" style="color: wheat;">
+        <a class="nav-link" (click)="divChangeI(3)">Approve</a>
+      </li>
+    </ul>
+  </nav>
+</div>

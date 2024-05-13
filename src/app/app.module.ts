@@ -24,12 +24,26 @@ import {
   MatIconModule,
   MatSidenavModule
 } from '@angular/material';
+import { LoginComponent } from './pages/login/login.component';
+import { AccountComponent } from './pages/CI/account/account.component';
+import { SalaryComponent } from './pages/CI/salary/salary.component';
+import { StoreComponent } from './pages/CI/store/store.component';
+import { HotelOrderComponent } from './pages/CI/hotel-order/hotel-order.component';
+import { ZomatoComponent } from './pages/CI/zomato/zomato.component';
+import { SettingsComponent } from './pages/CI/settings/settings.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    LoginComponent,
+    AccountComponent,
+    SalaryComponent,
+    StoreComponent,
+    HotelOrderComponent,
+    ZomatoComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
