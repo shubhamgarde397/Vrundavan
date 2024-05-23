@@ -3,6 +3,7 @@ import { NavigationComponent } from './pages/navigation/navigation.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AccountComponent } from './pages/CI/account/account.component';
 import { SettingsComponent } from './pages/CI/settings/settings.component';
+import { EmptyComponent } from './pages/empty/empty.component';
 
 export const routes: Routes =
 [
@@ -14,6 +15,10 @@ export const routes: Routes =
         path: 'Navigation',
         component: NavigationComponent,
         children:[
+            {
+                path:'',
+                component:EmptyComponent
+            },
             {
                 path: 'ACCOUNT',
                 component: AccountComponent

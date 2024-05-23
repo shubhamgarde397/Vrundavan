@@ -27,42 +27,8 @@ export class NavigationComponent implements OnInit {
   public s5=false;
   public s6=false;
   public innerDiv=[[{'add':false,'display':false}]]
-  public truckData=[
-    {
-        "_id": "65b8a16067e61d27f915da02",
-        "truckno": "MH45 RT 4545",
-        "pan": "",
-        "name": "",
-        "contact": 9766707061,
-        "l": 7,
-        "b": 7,
-        "h": 7,
-        "w": 7,
-        "type": "Open"
-    },
-    {
-        "_id": "65b9c73fd7e6c0822988d235",
-        "truckno": "TP12",
-        "pan": "",
-        "name": "",
-        "contact": 123,
-        "l": 1,
-        "b": 7,
-        "h": 7,
-        "w": 7,
-        "type": "Open"
-    }
-  ]
   public byTruckName=false;
-  public myFormGroup= new FormGroup({
-    truckno:new FormControl('', Validators.required),
-      contact:new FormControl(''),
-      l:new FormControl(''),
-      b:new FormControl(7),
-      h:new FormControl(7),
-      w:new FormControl(7),
-      type:new FormControl(''),
-  });
+
   constructor(
     public router: Router,
     public apiCallservice: ApiCallsService,
@@ -112,88 +78,8 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  submitAmt(){
-    let temp={
-      truckno:this.formatTruckNo(this.myFormGroup.value.truckno),
-      contact:this.myFormGroup.value.contact,
-      l:this.myFormGroup.value.l,
-      b:this.myFormGroup.value.b,
-      h:this.myFormGroup.value.h,
-      w:this.myFormGroup.value.w,
-      type:this.myFormGroup.value.type,
-      method:'addtruckbasicinfo'
 
-    }
-    this.apiCallservice.handleData_New_python(temp)
-    .subscribe((res: any) => {
-     alert(res.Status)
-      
-    });
-  
-  }
 
-  getAll(){
-    let temp={
-      method:'getAllTrucks'
-    }
-    this.apiCallservice.handleData_New_python(temp)
-    .subscribe((res: any) => {
-      this.byTruckName=res.Data.length>0?true:false;
-     this.truckData=res.Data;
-      
-    });
-  }
-  
-  delete(i:any,j:number){
-  let temp={
-    method:'deleteSingle',
-    _id:i._id
-  }
-  this.apiCallservice.handleData_New_python(temp)
-  .subscribe((res: any) => {
-    this.truckData.splice(j,1)
-  });
-  
-  }
-  setPAN(i,j){
-    let temp={
-      method:'setPan',
-      truckno:i.truckno,
-      pan:(<HTMLInputElement>document.getElementById('pan_'+j)).value,
-      oname:(<HTMLInputElement>document.getElementById('oname_'+j)).value
-    }
-    this.apiCallservice.handleData_New_python(temp)
-    .subscribe((res: any) => {
-      alert(res.Status)
-      this.truckData[j]['pd']=false;
-    });
-  }
-
-  formatTruckNo(a){
-    a=a.toUpperCase();
-    let newtruck=[]
-    let raw=a.replace(/ /g, "");
-    newtruck.push(raw.slice(0,2))
-    newtruck.push(raw.slice(2,4))
-    
-    if(raw.length==10){
-        newtruck.push(' ')
-        newtruck.push(raw.slice(4,6))	
-        newtruck.push(' ')
-        newtruck.push(raw.slice(6,10))	
-    }
-    if(raw.length==9){
-        newtruck.push(' ')
-        newtruck.push(raw.slice(4,5))	
-        newtruck.push(' ')
-        newtruck.push(raw.slice(5,9))	
-    }
-    if(raw.length==8){
-        newtruck.push(' ')
-        newtruck.push(raw.slice(4,8))	
-    }
-    return newtruck.join('')
-  }
 
 }
 

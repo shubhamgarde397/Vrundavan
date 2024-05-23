@@ -22,16 +22,6 @@ export class SettingsComponent implements OnInit {
   public categories=[];
 public categoryName='';
 public subCatName='';
-  public myFormGroup= new FormGroup({
-    date:new FormControl('', Validators.required),
-    category:new FormControl('', Validators.required),
-    subcategory:new FormControl('', Validators.required),
-    reason:new FormControl(''),
-    qty:new FormControl('', Validators.required),
-    amt:new FormControl('', Validators.required),
-    givenFrom:new FormControl('', Validators.required),
-    givenBy:new FormControl('', Validators.required),
-  });
   constructor(
     public router: Router,
     public apiCallservice: ApiCallsService,
@@ -95,9 +85,10 @@ public subCatName='';
 
   change(tab,name,id,ii?){
     let temp={};
-    console.log('hi');
     
     var a= prompt('You are changin value of '+name+' to ____');
+    if(a===null||a===''){}
+    else{
     switch (tab) {
       case 'c':
         temp={
@@ -107,11 +98,7 @@ public subCatName='';
           _id:id
         }     
         break;
-        case 'sc':
-          console.log(ii);
-          console.log(id);
-          console.log(this.categories);
-          
+        case 'sc':          
         temp={
           method:'update',
           code:tab,
@@ -125,5 +112,6 @@ public subCatName='';
       alert(res.Status);
     });
   }
+}
 
 }

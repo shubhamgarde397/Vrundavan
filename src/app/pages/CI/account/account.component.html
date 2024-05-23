@@ -1,18 +1,35 @@
 <div>
+
+  <div>
+      <ul class="nav nav-tabs">
+        <li class="nav-item" style="color: wheat;">
+          <a class="nav-link" aria-current="page" (click)="divChangeI(1)">Add</a>
+        </li>
+        <li class="nav-item" style="color: wheat;">
+          <a class="nav-link" (click)="divChangeI(2)">Get</a>
+        </li>
+        <li class="nav-item" style="color: wheat;">
+          <a class="nav-link" (click)="divChangeI(3)">Approve</a>
+        </li>
+      </ul>
+  </div>
+
   <form [formGroup]="myFormGroup" (ngSubmit)="submitAmt()" *ngIf="tab==1">
     <div>
       <label>Date</label>
-      <input formControlName="date" class="form-control">
+      <input type="date" formControlName="date" class="form-control">
     </div>
     <div><label>Category</label>
       <select label="Type" formControlName="category" class="form-control" (change)="getSCAT()">
-        <option *ngFor="let i of category;let j = index;" value={{i}}>{{i}}</option>
+        <option selected>Select</option>
+        <option *ngFor="let i of category;let j = index;" value={{j}}>{{i.categoryName}}</option>
       </select>
     </div>
     <div>
       <label>Sub Category</label>
       <select label="Type" formControlName="subcategory" class="form-control">
-        <option *ngFor="let i of subcategory;let j = index;" value={{i}}>{{i}}</option>
+        <option selected>Select</option>
+        <option *ngFor="let i of subcategory;let j = index;" value={{j}}>{{i}}</option>
       </select>
     </div>
     <div>
@@ -24,6 +41,15 @@
       <input type="number" formControlName="qty" value="" class="form-control">
     </div>
     <div>
+      <label>Measure</label>
+      <select label="Type" formControlName="measure" class="form-control">
+        <option value='KG'>KG</option>
+        <option value='LTR'>LTR</option>
+        <option value='GRAM'>GRAM</option>
+        <option value='UNIT'>UNIT</option>
+      </select>
+    </div>
+    <div>
       <label>Amount</label>
       <input type="number" formControlName="amt" value="" class="form-control">
     </div>
@@ -33,13 +59,13 @@
         <option value='Drawer'>Drawer</option>
         <option value='UPI'>UPI</option>
         <option value='To Pay'>To Pay</option>
-        <option value='Other'>Other</option>
       </select>
     </div>
 
     <div>
       <label>Given By</label>
       <select label="Type" formControlName="givenBy" class="form-control">
+        <!-- //make these dynamic -->
         <option value='Atharva'>Atharva</option>
         <option value='Rohit'>Rohit</option>
         <option value='Kaka'>Kaka</option>
@@ -52,17 +78,81 @@
         <button class="btn btn-danger" style="width: 100%;" [disabled]="!myFormGroup.valid">Submit</button>
     </div>
   </form>
-  <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: black;color: wheat;">
-    <ul class="nav nav-tabs">
-      <li class="nav-item" style="color: wheat;">
-        <a class="nav-link" aria-current="page" (click)="divChangeI(1)">Add</a>
-      </li>
-      <li class="nav-item" style="color: wheat;">
-        <a class="nav-link" (click)="divChangeI(2)">Get</a>
-      </li>
-      <li class="nav-item" style="color: wheat;">
-        <a class="nav-link" (click)="divChangeI(3)">Approve</a>
-      </li>
-    </ul>
-  </nav>
-</div>
+
+
+  <div class="well" *ngIf="tab==2">
+    <div class="row">
+      <div class="col-sm-4">
+        <input type="date" class="form-control" [(ngModel)]="date2">
+      </div>
+      <div class="col-sm-4">
+        <button style="width: 100%;" class="btn btn-warning" (click)="getE()">Summary</button>
+      </div>
+      <div class="col-sm-4">
+        <button style="width: 100%;" class="btn btn-danger" (click)="getAll()">All List</button>
+      </div>
+    </div>
+    <div *ngIf="all">
+      <div class="container" *ngFor="let i of allist;let j = index;">
+  
+        <div class="row">
+          <div class="col-xs-3">{{j+1}}.){{i.insertedby}}<br>{{i.givenBy}}<br>{{i.givenFrom}}<br>{{i.approvedBy}}</div>
+          <div class="col-xs-3">{{i.category}}<br>{{i.subcategory}}<br>{{i.reason}}</div>
+          <div class="col-xs-3">{{i.qty}}{{i.measure}}<br>{{i.amt}}</div>
+          <div class="col-xs-3" [ngStyle]="{'background-color':i.bgcolor}">{{i.approval}}<br>{{i.approvalReason}}</div>
+        </div>
+  <hr>
+      </div>
+    </div>
+
+    <div *ngIf="sum">
+      <div class="container">
+  
+        Approval List
+        <div class="row" *ngFor="let i of summary.Approvals">
+          <div class="col-xs-3" [ngStyle]="{'background-color': i.bgcolor}">{{i._id}}</div>
+          <div class="col-xs-3">{{i.sum}}</div>
+        </div>
+
+      </div>
+
+      <div class="container">
+  
+        Expenses List
+        <div class="row" *ngFor="let i of summary.Expenses">
+          <div class="col-xs-3">{{i._id}}</div>
+          <div class="col-xs-3">{{i.amount}}</div>
+        </div>
+
+      </div>
+
+    </div>
+  
+  
+   </div>
+
+
+
+ <div class="well" *ngIf="tab==3">
+  <button style="width: 100%;" class="btn btn-warning" (click)="getData()">Pending Approvals</button>
+    <div class="container" *ngFor="let i of pendingApproval;let j = index;">
+
+      <div class="row">
+        <div class="col-xs-3">*{{i.insertedby}}</div>
+        <div class="col-xs-3">{{i.category}}<br>{{i.subcategory}}<br>{{i.reason}}</div>
+        <div class="col-xs-3">{{i.qty}}{{i.measure}}<br>{{i.amt}}</div>
+        <div class="col-xs-3">{{i.givenBy}}<br>{{i.givenFrom}}<br>{{i.date|date:'dd-MM-yy'}}</div>
+        <div>
+          <button style="width: 50%;" class="btn btn-warning" (click)="approve(i,j)" [ngStyle]="{'background-color': i.btnColor}" [disabled]="i.btn">{{i.btnName}}</button>
+          <button style="width: 50%;" class="btn btn-danger" (click)="approveCancel(i,j)" [disabled]="i.btn">Reject</button>
+        </div>
+      </div>
+
+    </div>
+
+
+
+ </div>
+
+ 
+
