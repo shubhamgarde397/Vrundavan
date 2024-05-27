@@ -2,20 +2,20 @@
 
   <div>
       <ul class="nav nav-tabs">
-        <li class="nav-item" style="color: wheat;">
+        <li class="nav-item" style="color: wheat;" *ngIf="addTF">
           <a class="nav-link" aria-current="page" (click)="divChangeI(1)">Add</a>
         </li>
 
-        <li class="nav-item" style="color: wheat;">
+        <li class="nav-item" style="color: wheat;" *ngIf="getTF">
           <a class="nav-link" (click)="divChangeI(2)">Get</a>
         </li>
-        <li class="nav-item" style="color: wheat;">
+        <li class="nav-item" style="color: wheat;" *ngIf="approveTF">
           <a class="nav-link" (click)="divChangeI(3)">Approve</a>
         </li>
-        <li class="nav-item" style="color: wheat;">
+        <li class="nav-item" style="color: wheat;" *ngIf="dailyCashTF">
           <a class="nav-link" aria-current="page" (click)="divChangeI(4)">Daily Cash</a>
         </li>
-        <li class="nav-item" style="color: wheat;">
+        <li class="nav-item" style="color: wheat;" *ngIf="bankCashTF">
           <a class="nav-link" aria-current="page" (click)="divChangeI(5)">Bank Cash</a>
         </li>
       </ul>

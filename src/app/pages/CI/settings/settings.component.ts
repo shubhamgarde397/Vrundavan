@@ -19,9 +19,13 @@ import {FormControl, Validators} from '@angular/forms';
 export class SettingsComponent implements OnInit {
   public loginTypes=[];
   public tab=0;
+  public access=[];
   public categories=[];
   public roles=[];
 public categoryName='';
+public loginTF=false;
+public scatTF=false;
+public rolesTF=false;
 public subCatName='';
 public myFormGroup= new FormGroup({
   dName:new FormControl('', Validators.required),
@@ -54,6 +58,11 @@ public myFormGroupR= new FormGroup({
   ) { }
 
   ngOnInit() {
+    this.access=this.securityCheck.access.filter((r)=>{return r.name==='Settings'})[0]['names'];
+    
+    this.loginTF=this.access.filter((r)=>{return r.name==='Login'})[0]['access']
+    this.scatTF=this.access.filter((r)=>{return r.name==='CatScat'})[0]['access']
+    this.rolesTF=this.access.filter((r)=>{return r.name==='Roles'})[0]['access']
   }
 
   divChangeI(data){

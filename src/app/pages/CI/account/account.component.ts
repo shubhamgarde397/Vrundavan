@@ -30,7 +30,13 @@ export class AccountComponent implements OnInit {
   public bankDate2='';
   public all=false;
   public sum=false;
+  public access=[]
   public pendingApproval=[];
+  public addTF=false;
+  public getTF=false;
+  public approveTF=false;
+  public dailyCashTF=false;
+  public bankCashTF=false;
   public myFormGroup= new FormGroup({
     date:new FormControl('', Validators.required),
     category:new FormControl('', Validators.required),
@@ -62,6 +68,13 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.access=this.securityCheck.access.filter((r)=>{return r.name==='Accounts'})[0]['names'];
+    
+    this.addTF=this.access.filter((r)=>{return r.name==='Add'})[0]['access']
+    this.getTF=this.access.filter((r)=>{return r.name==='Get'})[0]['access']
+    this.approveTF=this.access.filter((r)=>{return r.name==='Approve'})[0]['access']
+    this.dailyCashTF=this.access.filter((r)=>{return r.name==='DailyCash'})[0]['access']
+    this.bankCashTF=this.access.filter((r)=>{return r.name==='BankCash'})[0]['access']
   }
 
   getSCAT(){
