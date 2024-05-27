@@ -1,4 +1,4 @@
-input,select,option,li,nav{
+input,select,option,li,nav,.check{
     background-color: black;
     color: wheat;
 }

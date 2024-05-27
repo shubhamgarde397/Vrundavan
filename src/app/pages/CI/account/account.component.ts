@@ -18,12 +18,16 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class AccountComponent implements OnInit {
   public tab=0;
+  public pendingCashCount=0;
   public allist=[];
   public date2='';
   public tableData=false;
+  public bankCash=[];
+  public bankDate='';
   public category=[];
   public summary=[];
   public subcategory=[]
+  public bankDate2='';
   public all=false;
   public sum=false;
   public pendingApproval=[];
@@ -37,6 +41,12 @@ export class AccountComponent implements OnInit {
     givenFrom:new FormControl('', Validators.required),
     givenBy:new FormControl('', Validators.required),
     measure:new FormControl('', Validators.required),
+  });
+  public myFormGroup1= new FormGroup({
+    date:new FormControl('', Validators.required),
+    cash:new FormControl('', Validators.required),
+    upi:new FormControl('', Validators.required),
+    givenTo:new FormControl('')
   });
   constructor(
     public router: Router,
@@ -57,7 +67,23 @@ export class AccountComponent implements OnInit {
   getSCAT(){
     this.subcategory=this.category[this.myFormGroup.value.category]['subCategory']
   }
+  submitCash(){
+    let temp=this.myFormGroup1.value;
+    temp={
+      method:'insert',
+      code:'e',
+      'date':this.myFormGroup1.value['date'],
+      'cash':this.myFormGroup1.value.cash,
+      'upi':this.myFormGroup1.value.upi,
+      'givenTo':this.myFormGroup1.value['givenTo'],
+    }    
 
+this.apiCallservice.handleData_New_python(temp)
+.subscribe((res: any) => {
+  alert(res.Status);
+  
+});
+  }
   submitAmt(){
 
     let temp=this.myFormGroup.value;
@@ -65,14 +91,14 @@ export class AccountComponent implements OnInit {
           method:'insert',
           code:'a',
           'date':this.myFormGroup.value['date'],
-    'category':this.category[this.myFormGroup.value.category]['categoryid'],
-    'subcategory':this.category[this.myFormGroup.value.category]['sid'][this.myFormGroup.value.subcategory],
-    'reason':this.myFormGroup.value['reason'],
-    'qty':this.myFormGroup.value['qty'],
-    'amt':this.myFormGroup.value['amt'],
-    'givenFrom':this.myFormGroup.value['givenFrom'],
-    'givenBy':this.myFormGroup.value['givenBy'],
-    'measure':this.myFormGroup.value['measure']
+          'category':this.category[this.myFormGroup.value.category]['categoryid'],
+          'subcategory':this.category[this.myFormGroup.value.category]['sid'][this.myFormGroup.value.subcategory],
+          'reason':this.myFormGroup.value['reason'],
+          'qty':this.myFormGroup.value['qty'],
+          'amt':this.myFormGroup.value['amt'],
+          'givenFrom':this.myFormGroup.value['givenFrom'],
+          'givenBy':this.myFormGroup.value['givenBy'],
+          'measure':this.myFormGroup.value['measure']
         }    
     
     this.apiCallservice.handleData_New_python(temp)
@@ -178,6 +204,25 @@ this.apiCallservice.handleData_New_python(temp)
   this.all=false;
   this.sum=true;
 }); 
+  }
+
+  getBankCashData(){
+    let temp={method:'display',code:'bankCash',date:this.bankDate.slice(0,7)}
+        this.apiCallservice.handleData_New_python(temp)
+        .subscribe((res: any) => {
+          this.bankCash=res.Data;
+          this.bankCash.forEach(r=>{
+            if(r.bankDate===''){this.pendingCashCount=this.pendingCashCount+1}
+          })
+        });
+  }
+
+  addToBank(data){
+    let temp={method:'update',code:'bankCash',date:this.bankDate2,'_id':data}
+        this.apiCallservice.handleData_New_python(temp)
+        .subscribe((res: any) => {
+          alert(res.Data);
+        });
   }
 }
 

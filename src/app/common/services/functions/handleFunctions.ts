@@ -337,4 +337,65 @@ export class handleFunction {
         return data[1]+spliter+data[0];
     }
 
+      generateBillByDate(date){//date format must be dd-mm-yyyy
+        let billno='';
+        let d = this.getDateddmmyy(date);
+        let day = d.slice(0,2)
+        let month = d.slice(3,5)
+        let year = d.slice(8)
+    
+        let monthName = this.genaratemonthNames()[parseInt(month)-1].slice(0,1)
+        billno = billno + monthName;
+        billno = billno + month;
+        billno = billno + day;
+        billno = billno + year;
+    
+        return billno;
+    }
+    
+      threshholdCalculator(data){//16
+    
+        let t=15
+        let oe = data%2==0?4:5//4
+        if(data>15){
+          if(data%15==0){
+            return 15;
+          }
+          else{
+            if(data>18){
+              return 15;
+            }
+            else{
+          return t=t-oe;//11
+            }
+          }
+        }
+        else{
+          return t;
+        }
+      }
+    
+      pageCalculator(data){
+        let t=this.threshholdCalculator(data);
+        let arr=[];    
+        if(data<15){
+          return 1
+        }
+        else{
+          arr.push(t);
+          data=data-t;
+          while(data>0){  
+            if(data<t){
+              arr.push(data);
+              data=0;
+            }
+            else{
+              arr.push(t)
+              data=data-t
+            }
+        }
+        return arr.length
+        }
+      }
+
 }

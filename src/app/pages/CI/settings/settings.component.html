@@ -5,23 +5,97 @@
         <a class="nav-link" aria-current="page" (click)="divChangeI(1)">Login Date</a>
       </li>
       <li class="nav-item" style="color: wheat;">
-        <a class="nav-link" (click)="divChangeI(2)">Register</a>
+        <a class="nav-link" (click)="divChangeI(2)">Cat SCat</a>
       </li>
       <li class="nav-item" style="color: wheat;">
-        <a class="nav-link" (click)="divChangeI(3)">Approvals</a>
-      </li>
-      <li class="nav-item" style="color: wheat;">
-        <a class="nav-link" (click)="divChangeI(4)">Cat SCat</a>
-      </li>
-      <li class="nav-item" style="color: wheat;">
-        <a class="nav-link" (click)="divChangeI(5)">Roles</a>
+        <a class="nav-link" (click)="divChangeI(3)">Roles</a>
       </li>
     </ul>
   
   </div>
 
 
-  <div *ngIf="tab==4">
+  <div *ngIf="tab==1">
+
+        <div class="well" style="background-color: black;">
+          <form [formGroup]="myFormGroup" (ngSubmit)="changePwd()" *ngIf="tab==1">
+            <div>
+              <label>Display Name</label>
+              <input type="text" formControlName="dName" class="form-control">
+            </div>
+          
+            <div>
+              <label>User Name</label>
+              <input type="text" style="background-color: black;color:wheat;" formControlName="uName" class="form-control" disabled>
+            </div>
+            <div>
+              <label>Password</label>
+              <input type="password" style="background-color: black;color:wheat;" formControlName="pwd" class="form-control">
+            </div>
+            <div>
+              <label>Confirm Password</label>
+              <input type="text" style="background-color: black;color:wheat;" formControlName="cpwd" class="form-control">
+            </div>
+            <div>
+              <label>Contact</label>
+              <input type="number" formControlName="contact" class="form-control">
+            </div>
+
+            <div>
+              <label>Logins</label>
+              <input type="number" style="background-color: black;color:wheat;" formControlName="logins" class="form-control" disabled>
+            </div>
+
+            <!-- <div>
+              <label>Login Types</label>
+              <table>
+                <tr>
+                  <th>Sr</th>
+                  <th>Date</th>
+                  <th>Logged In From</th>
+                </tr>
+                <tr *ngFor="let i of loginTypes">
+                  <td>{{j+1}}</td>
+                  <td>{{i|date:'dd-MM-yyyy'}}</td>
+                  <td>{{i.loginPlace}}</td>
+                </tr>
+              </table>
+            </div> -->
+
+            <div>
+                <button class="btn btn-danger" style="width: 100%;" [disabled]="!myFormGroup.valid">Submit</button>
+            </div>
+          </form>
+        </div>
+          
+        
+      </div>
+
+      <div *ngIf="tab==3">
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Sr</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Option</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of roles;let j = index;">
+              <td>{{j+1}}</td>
+              <td>{{i.displayName}}</td>
+              <td>{{i.roleName}}</td>
+              <td><button class="btn btn-danger" (click)="changeRole(i._id)">Change</button></td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+
+
+  <div *ngIf="tab==2">
 
 <div class="row">
   <button class="btn btn-warning" data-toggle="modal" data-target="#myModal">Category</button>

@@ -32,6 +32,8 @@ import { HotelOrderComponent } from './pages/CI/hotel-order/hotel-order.componen
 import { ZomatoComponent } from './pages/CI/zomato/zomato.component';
 import { SettingsComponent } from './pages/CI/settings/settings.component';
 import { EmptyComponent } from './pages/empty/empty.component';
+import { RegisterComponent } from './pages/Register/register/register.component';
+import { MaterialComponent } from './pages/Material/material/material.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { EmptyComponent } from './pages/empty/empty.component';
     HotelOrderComponent,
     ZomatoComponent,
     SettingsComponent,
-    EmptyComponent
+    EmptyComponent,
+    RegisterComponent,
+    MaterialComponent
   ],
   imports: [
     BrowserModule,

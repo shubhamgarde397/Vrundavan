@@ -1,0 +1,29 @@
+<div class="well" style="background-color: black;">
+  <form [formGroup]="myFormGroupR" (ngSubmit)="register()">
+    <div>
+      <label>Display Name</label>
+      <input type="text" formControlName="dName" class="form-control">
+    </div>
+  
+    <div>
+      <label>User Name</label>
+      <input type="text" style="background-color: black;color:wheat;" formControlName="uName" class="form-control">
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" style="background-color: black;color:wheat;" formControlName="pwd" class="form-control">
+    </div>
+    <div>
+      <label>Confirm Password</label>
+      <input type="text" style="background-color: black;color:wheat;" formControlName="cpwd" class="form-control">
+    </div>
+    <div>
+      <label>Contact</label>
+      <input type="number" formControlName="contact" class="form-control">
+    </div>
+
+    <div>
+        <button class="btn btn-danger" style="width: 100%;" [disabled]="!myFormGroupR.valid">Submit</button>
+    </div>
+  </form>
+</div>

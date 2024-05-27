@@ -1,0 +1,15 @@
+.well{
+    background-color: black;
+    color:wheat
+}
+
+input,select{
+    background-color: black;
+    color:wheat
+}
+
+input,select,option,li,nav,.check,.blackMail,textarea{
+    background-color: black;
+    color: wheat;
+}
+

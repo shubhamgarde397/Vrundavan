@@ -8,7 +8,6 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ObsServiceService } from 'src/app/common/services/Data/obs-service.service';
 import { handleFunction } from 'src/app/common/services/functions/handleFunctions';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-navigation',
@@ -19,6 +18,7 @@ import {FormControl, Validators} from '@angular/forms';
 @Input()
 export class NavigationComponent implements OnInit {
   public entry=false;
+  public displayName='';
   public show = false;
   public s1=false;
   public s2=false;
@@ -26,6 +26,11 @@ export class NavigationComponent implements OnInit {
   public s4=false;
   public s5=false;
   public s6=false;
+  public accountTF=false;
+  public materialTF=false;
+  public settingTF=false;
+  public logoutTF=false;
+  public access=[];
   public innerDiv=[[{'add':false,'display':false}]]
   public byTruckName=false;
 
@@ -44,42 +49,13 @@ export class NavigationComponent implements OnInit {
 
   
   ngOnInit() {
-    
+    this.displayName=this.securityCheck.dname;
+    this.access=this.securityCheck.access;
+    this.accountTF=this.access.filter((r)=>{return r.name==='Accounts'})[0]['access']
+    this.materialTF=this.access.filter((r)=>{return r.name==='Materials'})[0]['access']
+    this.settingTF=this.access.filter((r)=>{return r.name==='Settings'})[0]['access']
+    this.logoutTF=this.access.filter((r)=>{return r.name==='Logout'})[0]['access']
   }
-
-  divChange(data){
-    this.s1=false;
-    this.s2=false;
-    this.s3=false;
-    this.s4=false;
-    this.s5=false;
-    this.s6=false;
-    switch (data) {
-      case 1:
-        this.s1=true
-        // this.router.
-        break;
-
-        case 2:
-          this.s2=true;
-        break;
-        case 3:
-          this.s3=true;
-        break;
-        case 4:
-          this.s4=true;
-        break;
-        case 5:
-          this.s5=true;
-        break;
-        case 6:
-          this.s6=true;
-        break;
-    }
-  }
-
-
-
 
 }
 

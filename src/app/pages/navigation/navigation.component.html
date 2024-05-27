@@ -1,17 +1,17 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" routerLink="HOTEL_HOME">HOTEL VRUNDAVAN</a>
+      <a class="navbar-brand" routerLink="HOTEL_HOME">HOTEL VRUNDAVAN&nbsp;&nbsp;&nbsp;&nbsp;{{displayName}}</a>
     </div>
     
-        <button class="btn btn-danger" routerLink="ACCOUNT">Accounts</button>
-        <button class="btn btn-danger" (click)="divChange(2)">Salary</button>
-        <button class="btn btn-danger" (click)="divChange(3)">Store</button>      
-        <button class="btn btn-danger" (click)="divChange(4)">Order</button>
-              <!-- <button class="btn btn-danger" (click)="divChange(5)">Zomato</button>-->
-        <button class="btn btn-danger" (click)="divChange(6)">Charts</button>
-        <button class="btn btn-danger" routerLink="SETTINGS">Settings</button>
-        <button class="btn btn-danger" (click)="divChange(8)">Logout</button>
+        <button class="btn btn-danger" routerLink="ACCOUNT" *ngIf="accountTF">Accounts</button>
+        <!-- <button class="btn btn-danger" (click)="divChange(2)" *ngIf="accountTF">Salary</button> -->
+        <!-- <button class="btn btn-danger" (click)="divChange(3)" *ngIf="accountTF">Store</button>       -->
+        <button class="btn btn-danger" routerLink="MATERIAL" *ngIf="materialTF">Material</button>
+              <!-- <button class="btn btn-danger" (click)="divChange(5)" *ngIf="accountTF">Zomato</button>-->
+        <!-- <button class="btn btn-danger" (click)="divChange(6)" *ngIf="accountTF">Charts</button> -->
+        <button class="btn btn-danger" routerLink="SETTINGS" *ngIf="settingTF">Settings</button>
+        <button class="btn btn-danger" routerLink="/" *ngIf="logoutTF">Logout</button>
       
   </div>
 </nav>

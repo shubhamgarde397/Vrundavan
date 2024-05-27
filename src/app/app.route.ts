@@ -4,13 +4,16 @@ import { LoginComponent } from './pages/login/login.component';
 import { AccountComponent } from './pages/CI/account/account.component';
 import { SettingsComponent } from './pages/CI/settings/settings.component';
 import { EmptyComponent } from './pages/empty/empty.component';
+import { RegisterComponent } from './pages/Register/register/register.component';
+import { MaterialComponent } from './pages/Material/material/material.component';
 
 export const routes: Routes =
 [
     {
         path: '',
         component: LoginComponent
-    },   
+    },  
+    
     {
         path: 'Navigation',
         component: NavigationComponent,
@@ -23,22 +26,10 @@ export const routes: Routes =
                 path: 'ACCOUNT',
                 component: AccountComponent
             },
-            // {
-            //     path: 'SALARY',
-            //     loadChildren: './pages/OwnerDetails/app.module#OwnerModule'
-            // },
-            // {
-            //     path: 'STORE',
-            //     loadChildren: './pages/OwnerDetails/app.module#OwnerModule'
-            // },
-            // {
-            //     path: 'ORDER',
-            //     loadChildren: './pages/OwnerDetails/app.module#OwnerModule'
-            // },
-            // {
-            //     path: 'ZOMATO',
-            //     loadChildren: './pages/OwnerDetails/app.module#OwnerModule'
-            // },
+            {
+                path: 'MATERIAL',
+                component: MaterialComponent
+            },
             {
                 path: 'SETTINGS',
                 component:SettingsComponent
@@ -46,9 +37,9 @@ export const routes: Routes =
         ]
 
     },
-     {
-        path: 'Login',
-        component: LoginComponent
-    }
+    {
+        path: 'register',
+        component: RegisterComponent
+    },
 ];
 

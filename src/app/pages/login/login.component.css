@@ -9,7 +9,7 @@
     font-style: bold;
     color:black ;
   }
-  .input{
+  .input,textarea,input{
     background-color: black;
     border-color: ddd;
     color: white;
@@ -17,4 +17,6 @@
   button{
     border-color: black;
   }
+
+
 

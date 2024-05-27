@@ -20,6 +20,7 @@ export class SecurityCheckService {
 
   public AUTH = false;
   public username;
+  public access=[];
   public dname;
   public userid;
   public username2;
@@ -72,6 +73,9 @@ this.amountShow=data;
   }
   setVRid(data){
     this.vrid=data;
+  }
+  setAccess(data){
+this.access=data;
   }
 
   setRole(role) {

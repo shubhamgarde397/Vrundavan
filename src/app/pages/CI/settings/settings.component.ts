@@ -17,11 +17,29 @@ import {FormControl, Validators} from '@angular/forms';
   providers: [ApiCallsService, HandleDataService],
 })
 export class SettingsComponent implements OnInit {
-
+  public loginTypes=[];
   public tab=0;
   public categories=[];
+  public roles=[];
 public categoryName='';
 public subCatName='';
+public myFormGroup= new FormGroup({
+  dName:new FormControl('', Validators.required),
+  uName:new FormControl('', Validators.required),
+  pwd:new FormControl('', Validators.required),
+  cpwd:new FormControl(''),
+  contact:new FormControl('', Validators.required),
+  logins:new FormControl('', Validators.required)
+});
+
+public myFormGroupR= new FormGroup({
+  dName:new FormControl('', Validators.required),
+  uName:new FormControl('', Validators.required),
+  pwd:new FormControl('', Validators.required),
+  cpwd:new FormControl(''),
+  contact:new FormControl('', Validators.required)
+});
+
   constructor(
     public router: Router,
     public apiCallservice: ApiCallsService,
@@ -39,19 +57,40 @@ public subCatName='';
   }
 
   divChangeI(data){
-    if(data==4){
-      let temp={
-        method:'display',
-        code:'c',
+    if(data==2){
+      let temp={method:'display',code:'c',}
+      this.apiCallservice.handleData_New_python(temp)
+      .subscribe((res: any) => {
+        this.categories=res.Data;
+      });
+    }
+
+    if(data==1){
+      let temp={method:'display',code:'l1','vrid':this.securityCheck.vrid}
+      this.apiCallservice.handleData_New_python(temp)
+        .subscribe((res: any) => {
+          this.myFormGroup.patchValue(
+            
+            {'dName':res.Data[0].displayName,
+            'uName':res.Data[0].name,
+            'pwd':res.Data[0].password,
+            'cpwd':res.Data[0].password,
+            'contact':res.Data[0].contact,
+            'logins':res.Data[0].count
+            
+          })
+          this.loginTypes=res.Data[0]['loginTypes']
+        });
       }
 
-  
-  this.apiCallservice.handleData_New_python(temp)
-  .subscribe((res: any) => {
-    this.categories=res.Data;
-    
-  });
-}
+      if(data==3){
+        let temp={method:'display',code:'roles',}
+        this.apiCallservice.handleData_New_python(temp)
+        .subscribe((res: any) => {
+          this.roles=res.Data;
+        });
+      }
+
     this.tab=data;
   }
 
@@ -82,6 +121,46 @@ public subCatName='';
       
     });
   }
+
+  changePwd (){
+    if(this.myFormGroup.value.pwd===this.myFormGroup.value.cpwd){
+    let temp=this.myFormGroup.value;
+
+        temp['method']='update',
+        temp['code']='loginForm' 
+        
+    
+    this.apiCallservice.handleData_New_python(temp)
+    .subscribe((res: any) => {
+      alert(res.Status);
+      
+    });
+  }
+  else{
+    alert('Password incorrect');
+  } 
+  }
+
+  changeRole(j){
+    var a = parseInt(prompt('Enter the number for Role.\n\n1.Admin\n2.Employee\n3.Customer'));
+    if(a===null||a===undefined){}
+    else{
+      let temp={};
+  
+          temp['method']='update'
+          temp['code']='changeRole'
+          temp['_id']=j
+          temp['role']=a+1
+      
+      this.apiCallservice.handleData_New_python(temp)
+      .subscribe((res: any) => {
+        alert(res.Status);
+        
+      });
+    } 
+  }
+
+
 
   change(tab,name,id,ii?){
     let temp={};

@@ -8,6 +8,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { SecurityCheckService } from '../../common/services/Data/security-check.service';
 import { HandleDataService } from 'src/app/common/services/Data/handle-data.service';
 import { PassDataService } from 'src/app/pass-data.service';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-login',
@@ -49,6 +51,8 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
+
+
   setUser() {
     this.userTypeTS = this.userTypeHTML;
       this.loginButton = false;
@@ -56,11 +60,35 @@ export class LoginComponent implements OnInit {
       this.myFormGroup.controls['password'].enable();
   }
 
-  login(value) {
-value=value.value
+  detectBrowser() {
+    var userAgent = navigator.userAgent;
+    if (userAgent.indexOf("Edg") > -1) {
+        return "Microsoft Edge";
+    } else if (userAgent.indexOf("Chrome") > -1) {
+        return "Chrome";
+    } else if (userAgent.indexOf("Firefox") > -1) {
+        return "Firefox";
+    } else if (userAgent.indexOf("Safari") > -1) {
+        return "Safari";
+    } else if (userAgent.indexOf("Opera") > -1) {
+        return "Opera";
+    } else if (userAgent.indexOf("Trident") > -1 || userAgent.indexOf("MSIE") > -1) {
+        return "Internet Explorer";
+    }
 
+    return "Unknown";
+}
+
+
+register(){
+  this.isLoginSuccess=true;
+  this.router.navigate(['register']);
+}
+
+  login(value) {
+      value=value.value
       this.security.setUsername(value['username']);
-    this.logging=false;
+      this.logging=false;
       value['method'] = 'login';
       value['username']=value.username
       value['password']=value.password
@@ -74,6 +102,7 @@ value=value.value
             this.security.setUserid(res['Data'][0]['_id']);
             this.security.setUserName(res['Data'][0]['name']);
             this.security.setVRid(res['Data'][0]['vrid']);
+            this.security.setAccess(res['Data1']);
             if(this.entry(res['Data'])){
             this.isLoginSuccess=true;
             this.obs.updateApprovalMessage(res);
