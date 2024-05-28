@@ -130,7 +130,7 @@ this.apiCallservice.handleData_New_python(temp)
   
   this.apiCallservice.handleData_New_python(temp)
   .subscribe((res: any) => {
-    this.category=res.Data;
+    this.category=res.Data[0]['Data1'];
     
   });
 }
