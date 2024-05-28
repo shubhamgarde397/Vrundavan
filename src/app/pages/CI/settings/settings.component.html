@@ -170,7 +170,7 @@
           <div>
             <label>Category</label>
             <select class="form-control" [(ngModel)]="categoryName">
-              <option *ngFor="let i of categories;let j = index;" value={{i._id}}>{{i.categoryName}}</option>
+              <option *ngFor="let i of onlycat;let j = index;" value={{i._id}}>{{i.categoryName}}</option>
             </select>
           </div>
           <div>

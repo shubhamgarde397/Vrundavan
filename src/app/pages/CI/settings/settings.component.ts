@@ -25,6 +25,7 @@ export class SettingsComponent implements OnInit {
 public categoryName='';
 public loginTF=false;
 public scatTF=false;
+public onlycat=[];
 public rolesTF=false;
 public subCatName='';
 public myFormGroup= new FormGroup({
@@ -70,7 +71,8 @@ public myFormGroupR= new FormGroup({
       let temp={method:'display',code:'c',}
       this.apiCallservice.handleData_New_python(temp)
       .subscribe((res: any) => {
-        this.categories=res.Data;
+        this.categories=res.Data[0]['Data1'];
+        this.onlycat=res.Data[1]['Data2'];
       });
     }
 
